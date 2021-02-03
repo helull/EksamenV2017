@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        button {
+            font-size: 30px;
+        }
+        .vindmolle {
+            left:200px;
+            border-style: solid;
+            height: 800px;
+            width: 500px;
+            position: relative
+        }
+        #rotor {
+            position: absolute;
+            left:50px;
+            top: 20px;
+            transform-origin: center  204px;
+        }
+        #stolpe {
+            position: absolute;
+            top:220px;
+            left:210px;
+        }
+    </style>
+</head>
+<body>
+    <audio id="lyd" src="sommervind.mp3"></audio>
+    <div class="vindmolle">
+        <img id="stolpe" src="stolpe2.png" alt="">
+        <img id="rotor" src="rotor2.png" alt="">
+    </div>
+    <button id="stille">Stille</button>
+    <button id="bris">Bris</button>
+    <button id="kuling">Kuling</button>
+    <h1 id="info"></h1>
+
+    <script>
+        var stille = document.getElementById("stille");
+        var bris = document.getElementById("bris");
+        var kuling = document.getElementById("kuling");
+        var info = document.getElementById("info");
+        var lyd = document.getElementById("lyd");
+        var rotor=document.getElementById("rotor");
+        var spinning = rotor.animate(  //kap 9.5
+           [{transform:"rotate(0deg)"},{transform:"rotate(360deg)"}],
+            {duration:500, 
+             iterations: Infinity
+            }
+        );
+
+        spinning.pause();
+
+        stille.onclick = function () {
+            spinning.playbackRate = 0.1; 
+            spinning.play();
+            info.innerHTML = "0 - 0,2 m/s";
+            lyd.pause();
+        }
+
+        bris.onclick = function () {
+            spinning.playbackRate = 1; 
+            spinning.play();
+            info.innerHTML = "3,4 - 5,4 m/s";
+            lyd.play();
+        }
+
+        kuling.onclick = function () {
+            spinning.playbackRate = 2; 
+            spinning.play();
+            info.innerHTML = "13,9 - 17,1 m/s";
+            lyd.play();
+        }
+
+    </script>
+</body>
+</html>
